@@ -162,3 +162,155 @@ This script is provided as-is for educational and research purposes.
 ## Contributing
 
 Feel free to submit issues or pull requests for improvements.
+
+## Sample Output
+
+When you run the converter, you'll see output like this:
+
+```
+Starting conversion...
+Extracting images...
+Extracted 26 images
+Processing document content...
+Conversion complete!
+LaTeX file saved to: thesis-report.tex
+
+============================================================
+CONVERSION SUMMARY
+============================================================
+Figures: 0
+Tables: 9
+Images extracted: 26
+
+Next steps:
+1. Review the generated .tex file
+2. Ensure all images are in the 'images/' directory
+3. Compile with: pdflatex output.tex
+4. Run twice for proper references
+============================================================
+
+Success! LaTeX file created: thesis-report.tex
+```
+
+## Features Demonstrated
+
+### Heading Conversion
+- Word "Heading 1" style with "Chapter 1: Introduction" becomes `\chapter{Introduction}\label{ch:1}`
+- Word "Heading 2" becomes `\section{}`
+- Word "Heading 3" becomes `\subsection{}`
+
+### Text Formatting
+- **Bold text** in Word becomes `\textbf{Bold text}`
+- *Italic text* becomes `\textit{Italic text}`
+- Underlined text becomes `\underline{Underlined text}`
+
+### Lists
+Word lists are converted to LaTeX itemize/enumerate:
+```latex
+\begin{itemize}
+  \item First item
+  \item Second item
+\end{itemize}
+```
+
+### Tables
+Word tables become LaTeX tabular environments with proper formatting and captions.
+
+## Project Structure
+
+After running the converter:
+```
+thesis-report/
+├── thesis-report.docx       # Original Word document
+├── thesis-report.tex        # Generated LaTeX document
+├── docx_to_latex.py         # Conversion script
+├── images/                  # Extracted images
+│   ├── image.png
+│   ├── image2.png
+│   └── ...
+├── requirements.txt         # Python dependencies
+└── README.md               # This file
+```
+
+## Advanced Usage
+
+### Command Line Options
+```bash
+# Display help
+python docx_to_latex.py --help
+
+# Basic conversion (output will be thesis-report.tex)
+python docx_to_latex.py thesis-report.docx
+
+# Specify output file
+python docx_to_latex.py input.docx custom-output.tex
+```
+
+## Technical Details
+
+### Supported Word Styles
+- Heading 1, 2, 3, 4
+- Normal paragraphs
+- List Paragraph
+- Centered text
+- Bold, Italic, Underline formatting
+
+### LaTeX Packages Used
+The generated document includes standard packages for academic writing:
+- Graphics and figures: `graphicx`, `float`
+- Tables: `booktabs`, `longtable`
+- Math: `amsmath`, `amsfonts`, `amssymb`
+- Cross-references: `hyperref`
+- Page layout: `geometry`, `setspace`
+
+### Character Escaping
+Special LaTeX characters are automatically escaped:
+- `&` → `\&`
+- `%` → `\%`
+- `$` → `\$`
+- `#` → `\#`
+- `_` → `\_`
+- `{`, `}` → `\{`, `\}`
+- `\` → `\textbackslash{}`
+
+## Testing
+
+A simple validation can be run to ensure the conversion works:
+
+```python
+import os
+
+# Check if files exist
+assert os.path.exists('thesis-report.tex')
+assert os.path.exists('images/')
+
+# Validate LaTeX content
+with open('thesis-report.tex', 'r') as f:
+    content = f.read()
+    assert r'\documentclass' in content
+    assert r'\chapter{' in content
+    assert r'\begin{document}' in content
+    assert r'\end{document}' in content
+```
+
+## FAQ
+
+**Q: Can I use this with other document formats?**
+A: This script is specifically designed for .docx files. For other formats, consider using Pandoc.
+
+**Q: What if my document has complex equations?**
+A: Mathematical equations in Word may not convert perfectly. You may need to manually adjust them in LaTeX.
+
+**Q: How do I handle citations and bibliography?**
+A: This script converts the References section as regular text. For proper BibTeX integration, you'll need to manually create a .bib file and update the LaTeX accordingly.
+
+**Q: Can I customize the LaTeX output?**
+A: Yes! Edit the `generate_latex_preamble()` method in the script to customize packages, page layout, and other settings.
+
+## Version History
+
+- **v1.0** (2025-10-24): Initial release with full conversion support for headings, formatting, lists, tables, and images
+
+## Author
+
+Created for converting academic thesis documents from Word to LaTeX format.
