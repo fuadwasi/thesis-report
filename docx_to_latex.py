@@ -536,24 +536,28 @@ class DocxToLatexConverter:
         print("="*60)
 
 
+def print_usage():
+    """Print usage information."""
+    print("Usage: python docx_to_latex.py <input.docx> [output.tex]")
+    print("\nExample:")
+    print("  python docx_to_latex.py thesis-report.docx thesis-report.tex")
+
+
 def main():
     """Main entry point for the script."""
     # Handle help flag
     if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help', 'help']:
         print(__doc__)
-        print("\nUsage: python docx_to_latex.py <input.docx> [output.tex]")
+        print()
+        print_usage()
         print("\nArguments:")
         print("  input.docx    Path to the input Word document")
         print("  output.tex    (Optional) Path to the output LaTeX file")
-        print("\nExample:")
-        print("  python docx_to_latex.py thesis-report.docx thesis-report.tex")
         sys.exit(0)
     
     if len(sys.argv) < 2:
-        print("Usage: python docx_to_latex.py <input.docx> [output.tex]")
+        print_usage()
         print("\nFor more information, use: python docx_to_latex.py --help")
-        print("\nExample:")
-        print("  python docx_to_latex.py thesis-report.docx thesis-report.tex")
         sys.exit(1)
     
     input_file = sys.argv[1]
@@ -569,7 +573,8 @@ def main():
     # Check if input file exists
     if not os.path.exists(input_file):
         print(f"Error: Input file '{input_file}' not found!")
-        print("\nUsage: python docx_to_latex.py <input.docx> [output.tex]")
+        print()
+        print_usage()
         sys.exit(1)
     
     # Perform conversion
