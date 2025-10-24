@@ -1,0 +1,1094 @@
+\documentclass[12pt,a4paper]{report}
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage[table]{xcolor}
+\usepackage{longtable}
+\usepackage{float}
+
+% Page geometry
+\geometry{
+    left=1.5in,
+    right=1in,
+    top=1in,
+    bottom=1in
+}
+
+% Line spacing
+\onehalfspacing
+
+% Hyperref settings
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,
+    urlcolor=cyan,
+    citecolor=blue,
+}
+
+% Title page information (customize as needed)
+\title{Comparative Analysis of Neural Network Architectures for Stock Market Prediction}
+\author{Imamul Islam Ifti\\Student ID: 1909056}
+\date{September 2025}
+
+\begin{document}
+
+% Title page
+\maketitle
+
+% Front matter
+\frontmatter
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Supervised By}Dr. Sk. Shariful AlamProfessor,Department of Electronics and Communication Engineering,KUET, Khulna & \textbf{Submitted By}Imamaul Islam IftiRoll: 1909056Department of Electronics and Communication Engineering,KUET, Khulna \\
+\hline
+\end{tabular}
+\caption{Table 1}
+\label{tab:table1}
+\end{table}
+
+\chapter*{Acknowledgements}
+\addcontentsline{toc}{chapter}{Acknowledgements}
+
+\chapter*{Abstract}
+\addcontentsline{toc}{chapter}{Abstract}
+
+\tableofcontents
+\newpage
+
+\listoffigures
+\newpage
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{Figure} & \textbf{Figure} & \textbf{Figure} \\
+\hline
+1.1 & Task Estimation and Timeline in Gantt Chart & 19 \\
+\hline
+3.1 & Recurrent Neural Network Unit & 31 \\
+\hline
+3.2 & Long Short-Term Memory Unit & 32 \\
+\hline
+3.3 & Bi-LSTM model architecture & 33 \\
+\hline
+5.1(a) & Actual vs Predicted prices for LSTM on AAPL dataset & 49 \\
+\hline
+5.1(b) & Training vs Validation loss curve for LSTM on AAPL dataset & 49 \\
+\hline
+5.2(a) & Actual vs Predicted prices for Bi-LSTM on AAPL dataset & 50 \\
+\hline
+5.2(b) & Training vs Validation loss curve for Bi-LSTM on AAPL dataset & 50 \\
+\hline
+5.3(a) & Actual vs Predicted prices for RNN on AAPL dataset & 50 \\
+\hline
+5.3(b) & Training vs Validation loss curve for RNN on AAPL dataset & 50 \\
+\hline
+5.4(a) & Actual vs Predicted prices for GRU on AAPL dataset & 50 \\
+\hline
+5.4(b) & Training vs Validation loss curve for GRU on AAPL dataset & 50 \\
+\hline
+5.5(a) & Actual vs Predicted prices for CNN on AAPL dataset & 51 \\
+\hline
+5.5(b) & Training vs Validation loss curve for CNN on AAPL dataset & 51 \\
+\hline
+5.6(a) & Actual vs Predicted prices for CNN-LSTM on AAPL dataset & 51 \\
+\hline
+5.6(b) & Training vs Validation loss curve for CNN-LSTM on AAPL dataset & 51 \\
+\hline
+5.7(a) & Actual vs Predicted prices for CNN-GRU on AAPL dataset & 51 \\
+\hline
+5.7(b) & Training vs Validation loss curve for CNN-GRU on AAPL dataset & 51 \\
+\hline
+5.8(a) & Actual vs Predicted prices for LSTM on NIFTY dataset & 52 \\
+\hline
+5.8(b) & Training vs Validation loss curve for LSTM on NIFTY dataset & 52 \\
+\hline
+5.9(a) & Actual vs Predicted prices for Bi-LSTM on NIFTY dataset & 53 \\
+\hline
+5.9(b) & Training vs Validation loss curve for Bi-LSTM on NIFTY dataset & 53 \\
+\hline
+5.10(a) & Actual vs Predicted prices for RNN on NIFTY dataset & 53 \\
+\hline
+5.10(b) & Training vs Validation loss curve for RNN on NIFTY dataset & 53 \\
+\hline
+5.11(a) & Actual vs Predicted prices for GRU on NIFTY dataset & 53 \\
+\hline
+5.11(b) & Training vs Validation loss curve for GRU on NIFTY dataset & 53 \\
+\hline
+5.12(a) & Actual vs Predicted prices for CNN on NIFTY dataset & 54 \\
+\hline
+5.12(b) & Training vs Validation loss curve for CNN on NIFTY dataset & 54 \\
+\hline
+5.13(a) & Actual vs Predicted prices for CNN-LSTM on NIFTY dataset & 54 \\
+\hline
+5.13(b) & Training vs Validation loss curve for CNN-LSTM on NIFTY dataset & 54 \\
+\hline
+5.14(a) & Actual vs Predicted prices for CNN-GRU on NIFTY dataset & 54 \\
+\hline
+5.14(b) & Training vs Validation loss curve for CNN-GRU on NIFTY dataset & 54 \\
+\hline
+5.15 & Comparison of MAE, RMSE, MAPE, R² metrics across all models for both AAPL and NIFTY datasets. & 55 \\
+\hline
+\end{tabular}
+\caption{Table 2}
+\label{tab:table2}
+\end{table}
+
+\listoftables
+\newpage
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{Table} & \textbf{Table} & \textbf{Table} \\
+\hline
+1.1 & Budget of this project & 19 \\
+\hline
+5.1 & Performance comparison of different models on AAPL dataset & 52 \\
+\hline
+5.2 & Performance comparison of different models on NIFTY dataset & 55 \\
+\hline
+7.1 & Mapping of Complex Engineering Problems P’s & 66 \\
+\hline
+7.2 & Mapping of Complex Engineering Activities A’s & 67 \\
+\hline
+\end{tabular}
+\caption{Table 3}
+\label{tab:table3}
+\end{table}
+
+\mainmatter
+
+\chapter{Introduction}
+\label{ch:1}
+\section{1.1 Background of Financial Time Series}
+Financial time series are the records of time-dependent data of the historical behavior of financial instruments, e.g., the price of a stock, index, commodity, or currency, which are usually recorded at periodic intervals. The stock price, one of the most popular financial time series, is affected by many factors, and the market sentiment, macroeconomic indicators, and events in the company are among them. Proper modeling and prediction of such time series are essential to traders, investors, and financial institutions in a bid to maximize returns as well as reduce risks. Financial time series are not static datasets; therefore, they have time dependencies, trends, volatility, and noise such that prediction becomes a difficult task.
+
+\section{1.2 Importance of Stock Market Prediction}
+The stock market is a crucial component to the global economy as it eases capital allocation and investment. Stock price prediction enables investors and institutions to take informed decisions, manage their portfolios, as well as adopt risk mitigation reduction strategies. Sound predictions would result in substantial financial benefits whereas poor forecasts would result in high losses. In addition to financial benefits, efficient forecasting also helps in ensuring a stable and efficient market because it helps participants to act in advance on new developments and any possible disruptions in the market.
+
+\section{1.3. Challenges in Predicting Stock Market Prices}
+It is in nature difficult to predict stock market prices on account of a number of factors: 
+
+\textbf{Nonlinearity:} The price movements of stocks are usually nonlinear and therefore cannot be linearized in a traditional linear model. 
+
+\textbf{Noise and Randomness:} Financial markets are subject to noisy data driven by unpredictable events that contribute to high volatility.
+
+\textbf{Temporal Dependencies:} Trends, patterns and sequences of the past can impact on prices in the future, and such models need to be able to capture temporal dependence. 
+
+\textbf{Overfitting Risks:} When the data is limited in frequency or size, models can fit historical data in high frequency but fail to extrapolate to unseen data. 
+
+\textbf{Limited Predictive Features:} When only price-based information is used (as opposed to technical and fundamental indicators) it becomes even harder to make accurate predictions.
+
+\section{1.4 Motivation of the Study}
+As deep learning has emerged, sequential models and hybrid models like LSTM, GRU, and CNN-LSTM have also shown a high potential in modeling complex temporal patterns in financial time series. But relatively few studies have been made that concentrate on the price of raw stocks without the use of technical indicators. This paper will contribute to bridging this gap by conducting a systematic study of the performance of sequential and hybrid deep learning models on the stock performance of the chosen stocks (AAPL and NVDA) to identify the predictive and practical utility of these models.
+
+\section{1.5 Objectives}
+The principal aims of this thesis are: 
+
+\begin{itemize}
+  \item To investigate sequential deep learning (RNN, LSTM, GRU) to predict stock prices. 
+  \item To apply hybrid deep learning models (CNN-LSTM, CNN-GRU) to the same purpose. 
+  \item To compare and contrast model performance with various stock datasets (AAPL and NVDA) to measure generalizability. 
+  \item To evaluate the predictive performance of sequential and hybrid models in terms of evaluation measures (RMSE, MAE, MAPE, and R2 score).
+  \item To examine model behavior, stability as well as applicability to realistic applications in financial forecasting.
+\section{1.6 Scope and Limitations}
+\end{itemize}
+
+Scope:
+
+\begin{itemize}
+  \item Pay attention to the estimation of the daily close prices of AAPL and NVDA stocks in Yahoo Finance. 
+  \item Apply raw historical price data in absence of any technical or basic indicators. 
+  \item Comparison between sequential (RNN, LSTM, GRU) and hybrid (CNN-LSTM, CNN-GRU) deep learning architectures. 
+  \item Comparison between various train-test split strategies: 
+  \item 80\% training and 20\% testing 
+  \item 70\% training, 20\% skip (gap), and 10\% testing. 
+  \item Performance and generalization in the context of models analyzed on a variety of datasets. 
+\end{itemize}
+
+Limitations: 
+
+\begin{itemize}
+  \item Small sample size (only two stocks) that might influence the extrapolation to the market in general. 
+  \item Only the historical price data is used to train the models, and no technical or fundamental indicators are employed. 
+  \item Market shocks, news events or macroeconomic factors are not explicitly modeled. 
+  \item The computational aspect can put restrictions on large hyperparameter optimization or exploration with more data.
+\section{1.7 Project Planning}
+\subsection{1.7.1 Gantt Chart}
+\end{itemize}
+
+\begin{center}
+\textit{Fig 1.1: }\textit{Task Estimation and Timeline in Gantt Chart}
+\end{center}
+\section{1.8 Project Budget}
+\subsection{1.8.1 Overall Budget}
+\subsection{Table-1.1: Budget of this project}
+\begin{table}[htbp]
+\centering
+\begin{tabular}{|l|l|l|l|}
+\hline
+SL & Item & Justification & Price \\
+\hline
+1 & Bookbinding & A Written document will be present there & 1500 \\
+\hline
+2 & Google Collab subscription (500 unit) & I have massive amount of data to train, and my local machines are not capable enough to support this & 5500 \\
+\hline
+Total & Total & Total & 7000 \\
+\hline
+In words: Seven thousand taka only & In words: Seven thousand taka only & In words: Seven thousand taka only & In words: Seven thousand taka only \\
+\hline
+\end{tabular}
+\caption{Table 4}
+\label{tab:table4}
+\end{table}
+
+\section{1.9 Summary}
+This chapter presented an overview of the study, the history of financial time series and the significance of stock market forecasting. The difficulties connected with stock price forecasting were described. The rationale aims, and extent of the research were explained, and the focus on assessing various datasets and varying train-test divisions. Milestones and budget Project planning was introduced to guarantee systematic implementation. The following chapter will be a review of literature on sequential and hybrid deep learning models in financial time series prediction.
+
+\chapter{Literature Review}
+\label{ch:2}
+\section{2.1 Overview of Stock Market Prediction Approaches}
+Stock market prediction Stock market prediction is a topic of research which has been in existence for decades because of its economic and financial effects. Early years the statistical and econometric models, such as autoregressive integrated moving average and generalized autoregressive conditional heteroskedasticity, were designed and used in price time series modeling to provide the dependence on historical and observed volatility.[1] These models worked well in terms of linear relationships but were not applicable to nonlinear relationships and dynamic market trends.[1][5] With the increase in computational ability, machine learning algorithms like support vector machines, random forests and gradient boosting became another framework that can predict nonlinearities and complex interacting features. Recently, more advanced models, including Recurrent Neural Networks, Long Short-Term Memory, Gated Recurrent Unit, and their combination (CNN-LSTM, CNN), have spectacular performance in the classification and prediction tasks with structured data [2].
+
+\section{2.2 Classical Machine Learning Approaches}
+Financial prediction has been a popular machine learning use case using classical machine learning algorithms: 
+
+\textbf{Linear Regression:} Simple regression models predict stock returns or prices and are incapable of predicting nonlinear dependencies. [2]
+
+\textbf{Support Vector Machines (SVMs):} Can be effectively used in classification-based predictions (e.g. uptrend vs. downtrend) but not in continuous regression problems.[1] 
+
+\textbf{Decision Trees and Random Forests:} Can learn nonlinear relationships and interactions between features but can overfit small datasets. [1]
+
+\textbf{Gradient Boosting (}\textbf{XGBoost}\textbf{, }\textbf{LightGBM}\textbf{):} Ensemble-based frameworks that tend to perform better than more basic models in short term prediction problems. [1]
+
+Although they were better predictors than purely statistical models, these models were still incapable of capturing all the predictive sequential dependencies and long-range correlated features that are observable in stock price data.
+
+\section{2.3 Deep Learning for Time Series Prediction}
+Deep learning has revolutionized financial time series prediction through the use of neural networks that are able to capture both nonlinearities and temporal relationships [1][2]. The deep learning models, in contrast to classical methods, automatically learn complex hierarchical features and extract features in raw data.
+
+\subsection{2.3.1 Sequential Models}
+Sequential models are developed to deal with the ordered data in which the previous values will affect upcoming results:[7]
+
+\textbf{Recurrent Neural Networks (RNNs):} The simplest time-dependent model, which works well on the short-term, but has a higher chance of vanishing gradients. [1]
+
+\textbf{Long Short-Memory (LSTM):} A more complex form of RNNs, which have memory cells that get long-term dependencies and overcome the problem of the vanishing gradient. Applied in the stock market, as it is a widely used model in predicting long sequences of history.[4]
+
+\textbf{Gated Recurrent Unit (GRU):} A reduced parameter LSTM, which is computationally efficient, but has the same predictive power. [7]
+
+\subsection{2.3.2 Hybrid Models}
+Hybrid architectures Hybrid architectures are a combination of two or more deep learning methods:
+
+\textbf{CNN-LSTM:} It is based on the utilization of Convolutional Neural Networks (CNNs) to learn the spatial/temporal features of time windows, and then LSTM layers are used to learn the sequential dependencies. [3]
+
+\textbf{CNN-GRU:} CNN-GRU is like CNN-LSTM except that it uses GRU units rather than LSTMs to offer efficiency with less complexity. 
+
+\textbf{Attention-based Hybrids:} Members of this category incorporate attention mechanisms into sequential models to provide different levels of emphasis to previous observations.
+
+Hybrid models are usually stronger than single sequential models, as it combines the strong point of CNNs (feature extraction) and RNN-based units (sequence modeling).
+
+\section{2.4 Comparative Study on Sequential vs Hybrid Models}
+The relative performance of sequential and hybrid deep learning models has been studied in several studies: 
+
+\begin{itemize}
+  \item Sequential models such as LSTM and GRU are constantly superior to classical strategies of ML, as they include the capacity to identify the temporal trends.
+  \item Hybrid feedforward models like CNN-LSTM are more accurate and converge faster especially when dealing with high-dimensional and noisy data. 
+  \item It is also found in the literature that hybrid models are more generalizable to other datasets, but with a higher model complexity and training time. 
+\end{itemize}
+
+The decision to use sequential or hybrid models in the financial prediction tasks is frequently determined by the size of the dataset, its complexity, and the limitations of computing possibilities.
+
+\section{2.5 Evaluation Metrices in Financial Time Series Predictions}
+To measure the performance of models in stock price prediction, it is necessary to have strong measures of error:
+
+\begin{itemize}
+  \item \textbf{Mean Absolute Error (MAE):} Calculates the absolute average errors, average error magnitude regardless of direction.
+  \item \textbf{Mean Squared Error (MSE):} It penalizes bigger errors more and emphasizes huge deviations.
+  \item \textbf{Root Mean Squared Error (RMSE):} Square root of MSE, and this is also a measurement in the same unit of data. 
+  \item \textbf{Mean Absolute Percentage Error (MAPE):} The error is expressed as a percentage, which is used to compare across datasets.
+  \item \textbf{R2 Score (Coefficient of Determination):} The measure of the amount of variation in the data accounted for by the model. 
+\end{itemize}
+
+A combination of these measures gives the information about the model accuracy, robustness, and generalization.
+
+\section{2.6 Research Gaps}
+Notwithstanding the tremendous progress, there are several gaps in research:
+
+\begin{itemize}
+  \item There is a dearth of studies which directly compare sequential and hybrid deep learning models when using only raw stock prices and no engineered features or indicators.
+  \item The majority of the works deal with one dataset, which restricts the knowledge on the model generalizability in other stocks. 
+  \item In literature, there is little mention of comparative experiments with varying train-test split strategies (e.g. simple vs skip-split). 
+  \item Only a small number of studies put a focus on the trade-off between model complexity, computational efficiency and predictive performance. 
+\end{itemize}
+
+To fill these gaps, the thesis will be dedicated to a systematic investigation of sequential and hybrid deep learning models based on various datasets (AAPL, NVDA) and training-testing strategies to assess their relative efficiency in predicting the stock market.
+
+\chapter{Methodology}
+\label{ch:3}
+\section{3.1 Research Framework and Workflow}
+This study uses a comparative empirical method to analyze the performance of different deep learning models in predicting stock prices. The methodology is systematic in that it uses a systematized workflow, which guarantees reproducibility and strength of findings.
+
+The research structure is divided into the four phases: Data Collection and Preprocessing, in which the data on historical stock prices is collected and formatted to be analyzed;  Model Development, which implies the application of seven distinct neural network architectures; Model Training and Evaluation, where each model is trained under the same circumstances and evaluated through an array of performance indicators; and Comparative Analysis, according to which the results are compared across datasets and models with each other.
+
+The process starts with the acquisition of the historic stock price data in two different markets, one based in the US, Apple Inc. (AAPL) and one based in India, NIFTY 50 index. This two-data implementation of the model allows cross-market checking of the model performance and offers information about the generalizability of various architectures in different financial settings.
+
+The same preprocessing steps are applied to each dataset so that they can be fairly compared, such as treatment of missing values, lagged variable creation to the data, and data normalization. Then, seven neural network models are executed and trained with the help of matching hyperparameters and training processes. The models are tested with the help of five complementary performance criteria, and the results are maintained to compare them in order to trace the best architectures in prediction of stock prices.
+
+\section{3.2 Dataset Collection and Preprocessing}
+\subsection{3.2.1 Data Source}
+The study uses the historical stock price information of two main sources of two market characteristics. Apple Inc. (AAPL) dataset, which is a large-cap technology stock of the US market, gives information on the dynamics of the developed market. The Indian stock market benchmark on NIFTY 50 index provides insight on emerging market behavior.
+
+Both datasets will include information on Open, High, Low, Close price of stock that trades on a daily basis as well as trading volume. The data covers several years to encompass all the market situations such as bull markets, bear markets, and high volatile times. Such temporal coverage means that the models will be trained and testable across a variety of market conditions, improving the strength of the results.
+
+\subsection{3.2.2 Data Description}
+The datasets are the basic stock market variables that are needed in price prediction analysis. The following attributes are contained in each record: Date (trading date), Open (opening price), High (highest price of that trading day), Low (lowest price of that trading day), Close (price at the end of the trading day) and Volume (number of shares that were traded).
+
+The variable that is to be predicted is the closing price because it is the last agreement among the people in the market at the close of every trading period. Temporality of the data requires one to treat it carefully to preserve the chronological order and to avoid data leakage during the training and testing of the model.
+
+The statistical properties of the two sets depict common financial time series properties such as non-stationarity, volatility clustering, and existence of trends and seasonal patterns. The datasets have varying volatility patterns and price levels which serve as a good testbed to test the model strength under different market conditions.
+
+\subsection{3.2.3 Missing Value Treatment}
+The data in the financial time series is frequently missing because of market holidays, trading suspensions or data collection problems. The missing data are handled in a systematic manner without loss of time of the series.
+
+It starts with the identification of missing values in all the price variables. In the case of time series gaps (i.e., missing trading dates), a full date range is constructed (between minimum and maximum date in the data set). Blank price values are then filled by forward-fill methodology in which the last price is brought forward to fill missing values.
+
+This method is especially appropriate when working with financial data because it is assumed that the prices do not change when the market is not trading, which is consistent with market behavior over the weekend and holidays. The forward-fill technique maintains price levels and avoids the addition of artificial price fluctuations that may be used to deceive the learning algorithms.
+
+\subsection{3.2.4 Feature Engineering (Lagged Variables)}
+One important part of this methodology is that lagged features are created to avoid data leakage, a weakness in time series prediction whereby future data accidentally affect model training. This is the basic flaw of traditional methods that rely on same-day price variables to make forecasts of closing prices.
+
+To solve this kind of problem, lagged variables are formed with the price information of the day before. In particular, the characteristics Previous High (Prev\_High), Previous Low (Prev\_Low), and Previous Open (Prev\_Open), are defined as the movement of the price variables corresponding to one time. This is because only past data is being applied to forecast the future prices.
+
+Lagged feature approach represents real trading conditions in the real world where investors make their decisions given the past information in a market. This time-lapse between input features and target variables is the key to developing practically useful prediction models which, in theory, may be practically applied in live trading systems.
+
+Once lagged features are generated, any rows which have no values (those most often being the first row because of the lag operation) are dropped out of the dataset, maintaining the integrity of the data and ensuring that all architectures train on the same data.
+
+\subsection{3.2.5 Data Normalization and Scaling}
+The neural networks work best when the input features are scaled to equal levels such that the variables with larger values do not overtake the learning process. All the input features are standardized through the StandardScaler method.
+
+The StandardScaler normalizes the values of every feature to have a means of 0 and a variance of 1 by the formula
+
+							(3.1)
+
+with x being the original value, μ as the mean, and σ as the standard deviation. Such transformation also makes sure that input features play equal roles in the learning process and it encourages quicker convergence in training.
+
+Mean and standard deviation (the scaling parameters) are calculated using training data only to avoid the possibility of data leakage. These parameters are then used on both training and testing sets with the same statistical properties learned in the training set and we want to be sure that test set normalization does not add future information into the model training process.
+
+\section{3.3 Model Architecture and Design}
+In this study, seven different neural network structures are applied, which provide different features to predicting time series. The models are categorized as simple recurrent networks through to advanced hybrid structures covering the modern deep learning methodology of financial prediction. Each of the models is created with uniform output layers, with a single linear activation unit that can be used in regression. The architectures keep the level of complexity (50 units in recurrent layers, 64 filters in convolutional layers) comparable to provide fair performance comparison across models of various types.
+
+\subsection{3.3.1 Simple RNN}
+The Simple Recurrent Neural Network (RNN) is used as a benchmark architecture, where the key idea is the use of recurrent connections, which allow the sequential information to be processed. The architecture is made up of a single layer of Simple RNN with 50 units and ReLU activation and has a dense output.
+
+The RNN has an internal state, which is updated at each time step, enabling the model to learn history of the earlier inputs. Simple RNNs however have the vanishing gradient problem which restricts their capability to learn long term dependencies in time series data. However, this drawback does not mean that Simple RNN cannot be used as a reference point to judge more advanced systems.
+
+\begin{center}
+\textit{Fig 3.1 Recurrent Neural Network unit}
+\end{center}
+The Simple RNN can be mathematically formulated as: 
+
+								(3.2)
+
+where \textit{h}\textit{t}\textit{ }is the hidden state at time \textit{t}, \textit{W}\textit{h}\textit{h}\textit{ }and \textit{W}\textit{x}\textit{h} are weight matrices, \textit{x}\textit{t} is the input at time\textit{ t }and \textit{b}\textit{h} is the bias vector.
+
+\subsection{3.3.2 LSTM Network}
+LSTM is a specific form of RNN that has a wide scope of purposes such as document classification, time series analysis, voice and speech recognition. Opposite to feedforward the predictions (generated by RNNs) are conditional. on prior estimations. RNNs are not in the case of experimental works. applied in a general sense because it contains a few lacks leading to. impractical estimations. LSTM solves this without too much investigation.
+
+the issues through conduction of forgetting old by using dedicated gates. knowledge and acquire new ones. LSTM layer is made of four layers of neural networks that communicate in a particular way. The typical LSTM module consists of three components, a cell, an output gate and a forget gate. The main task of cell is being able to identify values between chance, time and task. of regulating the inflow and outflow of information into the cell. belongs to the gates.
+
+\begin{center}
+\textit{Fig 3.}\textit{2}\textit{: }\textit{Long Short-Term Memory (LSTM) unit}
+\end{center}
+\subsection{3.3.3 Bidirectional LSTM}
+The Bidirectional LSTM is an expansion on the typical LSTM architecture because it operates on sequences in both forward and reverse directions, making the model available to all contextual information in both directions of the future and past time steps of the training sequence.
+
+In this architecture, there are two LSTM layers, one that takes the sequence at the start and end, and the other takes sequence at the end and beginning. The two directions give the resulting outputs which are added to create the final representation that allows the model to use all the sequence context information.
+
+\begin{center}
+\textit{Figure 3.}\textit{3}\textit{: Bi-LSTM model architecture}
+\end{center}
+In predicting stock prices, the bidirectional method can be used to grasp the patterns that are reliant on the previous and following price changes in the training period. The model adds together the responses of the forward and backward LSTM, a feature representation which is richer and may lead to the enhancement of the accuracy of predictions. The bidirectional processing works as follows:
+
+											(3.3)
+
+and the forward and backward LSTM work in chronological order and reversed chronological order respectively where the results are added together to constitute the final hidden state.
+
+\subsection{3.3.4 GRU Network}
+The Gated Recurrent Unit (GRU) is an alternative to LSTM that is simpler in form and can achieve similar performance, but with less computational complexity. GRU splits the forget and input gates of LSTM into one update gate and fuses the cell state and hidden state. The realized GRU model is characterized by a single GRU layer and 50 units and ReLU activation. GRU has a simplistic architecture that can be used to achieve computational efficiency and still extract long-term sequences in sequential data. Such a performance benefit can be essential when resources like computation time are limited to practical use. GRU uses two gates, the reset gate (rt = 0 = 1) and the update gate (zt = 0 = 1). The reset gate decides the extent to which previous information should be forgotten whereas the update gate decides the extent to which new information should be encoded in the hidden state.
+
+\subsection{3.3.5 CNN for Time Series}
+Convolutional Neural Network (CNN) applies to the ideas of the spatial pattern recognition to the time-related data, employing the concept of the convolutional filters to identify the local patterns and features in the sequence of time series. This will use the time series as a one-dimensional signal in which convolutional operations can determine recurring patterns.
+
+For the CNN architecture, it uses Conv1D where the filters are 64 with a 2-kernel size and ReLU activation with flattening layer preceding the dense output layer. The convolutional method is best at determining local time series trends and can support parallel calculation process of time series.
+
+In contrast to recurrent architectures, CNNs update all time steps simultaneously, and are computationally efficient and free of the vanishing gradient problem. Convolutional filters are used as feature detectors and they discriminate certain patterns within the input sequence, which are pertinent in price prediction.
+
+The convolution is performed in the following manner:
+
+									(3.4)
+
+where \textit{f }is the weights of the filters and \textit{x }is the input sequence. Various filters are trained to recognize various temporal patterns, generating an elaborate feature representation in which the prediction task is performed.
+
+\subsection{3.3.6 Hybrid CNN-LSTM}
+The CNN-LSTM hybrid design is an architecture that uses pattern recognition of CNNs to form a two-step feature detection and temporal modeling framework that uses the sequence processing capacity of LSTMs. This architecture would initially perform convolutional operations on the data to detect the local patterns and then perform LSTM modeling the temporal relationship between the patterns.
+
+It starts with a Conv1D layer (64 filters, kernel size 2), which identifies local temporal features, and then an LSTM layer (50 units) is used to process the sequence of local features. Such a hierarchical process allows the model to retain all local dependencies, as well as long-term temporal dependencies.
+
+The hybrid method is also especially efficient in the context of financial time series when the short-term dynamics (identified by CNN) are combined with long-term changes (modeled by LSTM), which have an impact on price dynamics. The CNN component is a kind of an automatic feature extractor, and the LSTM component captures the temporal dynamics of these features.
+
+\subsection{3.3.7 Hybrid CNN-GRU}
+Like CNN-LSTM architecture, CNN-GRU hybrid is a combination of convolutional feature extraction with the temporal modeling feature of GRUs. This architecture preserves the computational efficiency of GRU and enjoys the pattern detection of CNN.
+
+The architecture structure is a reflection of the CNN-LSTM structure but with the LSTM replaced by a GRU layer (50 units), possibly providing shorter training times, with a similar prediction performance to competitors. GRU has a simplified gating mechanism that could be adequate to model time relationships among CNN-extracted features.
+
+The hybrid method is considered as an effective substitute to CNN-LSTM, especially in cases when computation resources are constrained or faster training is required. The composite takes advantage of the strong points of the two architectures as well as the weaknesses of each.
+
+\section{3.4 Model Training and Hyperparameter selection}
+The training methodology also focuses on reproducibility, overfitting avoidance, and reasonable comparison of all model architectures. Standardized hyperparameters and training regimes are used to be sure that differences in performance can be attributed to architectural benefits, and not to variation in training.
+
+\subsection{3.4.1 Data Leakage Prevention}
+Preventing data leakage is essential to the development of effective predictive models which can project to unknown data. The main tool used to prevent data leakage is lagged features, whereby only information that is available in the past is used as the prediction input.
+
+The process of feature engineering is used to derive lagged variables based on information about the past day of prices (Prev\_High, Prev\_Low, Prev\_Open) to determine the closing price of the current day. This time difference assures the model of learning past trends instead of the present relationships that would be unattainable in the real-world prediction context.
+
+Also, all preprocessing operations (normalization parameters, train-test splits) are computed based on training data alone, so that no information about the test data is used to train the models. This rigid division ensures the integrity of the evaluation process and gives realistic estimates of performance.
+
+\subsection{3.4.2 Overfitting Prevention}
+Overfitting means that models are trained on the specific patterns that are present in the training data and that are not present in the new data. There are a number of measures taken to reduce overfitting to enhance the ability of the model to generalize.
+
+The main overfitting prevention method is called early stopping, and early stopping is a training technique that keeps an eye on the validation performance and halts training once the performance ceases to improve. In this way, this method ensures that the models do not overfit training data patterns and still be able to generalize well.
+
+The model architecture options are also helpful in overfitting prevention. The somewhat small network sizes (50 units of recurrent layers, 64 filters of convolutional layers) trade model capacity and generalization capability. These do not over-parameterize themselves that these architectures have enough complexity to learn relevant patterns, but without providing excessive parameterization that might overfit them.
+
+\subsection{3.4.3 Early Stop Strategy}
+Early stopping is applied with the aid of Early Stopping callback in TensorFlow, which checks validation loss and halts training, when no progress is detected in each number of epochs (patience). The strategy reinstates the optimal weights of the models seen during training, hence achieving optimal performance.
+
+The early stopping set up works with the validation loss as the monitoring criterion with patience of 5 epochs. This is because training will continue provided the loss of validation decreases but will terminate when there is no change across the next 5 consecutive epochs. The optimal model weights are automatically reinstated, which avoids the need to keep on training to degrade performance.
+
+This is the best way to balance bias and variance by identifying the tradeoff point at which the model complexity is only enough to represent underlying patterns without the model overfitting to noise in the training data. The automatic stopping mechanism is a feature which makes training procedures identical in every architecture.
+
+\subsection{3.4.4 Reproducibility Measure}
+High reproducibility is provided by a high degree of seed setting and determinate operations. All random number generators such as the random module of Python, NumPy, and TensorFlow will have a global seed (42) to guarantee the same results upon repeated execution.
+
+Other reproducibility guidelines are to enable the PYTHONHASHSEED environment variable, and deterministic operations in TensorFlow. These steps regulate the sources of randomness in the model initialization, data shuffling and training.
+
+The reproducibility framework provides consistency in the comparison of the results and allows the replication of the research findings. Every model architecture is placed in the same random environment, and so the architectural capabilities determine the performance disparities and not random differences in initializations.
+
+\subsection{3.4.5 Train-Test Split Strategy}
+The train-test split approach preserves temporal sequence needed in time series analysis and does not restrict the data amount needed to train and evaluate a model. A chronological split method splits the data into 80 and 20 percent training and test sets respectively without any shuffling in order to maintain temporal ties.
+
+This temporal division is to assure that all training data comes before the test data time-wisely, which is a realistic predictive case that the model is trained using historical data and tested on future dates. The method gives unbiased performance estimates which are realistic in application.
+
+The 80-20 split ratio provides sufficient training information to be used in model learning and leaves enough test information to be used in the reliable performance evaluation. The chronological order ensures that information will not be leaked into the training process in the future, and it keeps the predictive modeling framework intact.
+
+\section{3.5 Evaluation Metrices}
+The performance of models is measured with the help of five complementary measures reflecting the various facets of prediction accuracy and model quality. This multi-metric method is able to give in-depth assessment and avoid excessive dependence on one measure of performance.
+
+The choice of metrics used in the evaluation indicates the level of statistical rigour as well as relevance to the financial application. The measures can be absolute measures of error to relative performance measures, which give information on the accuracy of prediction and the reliability of the model in various market situations.
+
+\subsection{3.5.1 Mean Absolute Error (MAE)}
+Mean Absolute Error measures the average intensity of prediction errors regardless of direction. MAE offers the ease of measurement of prediction accuracy in the same units with the target variable (stock price).
+
+The mathematical formulation of MAE is 
+
+								(3.5)
+
+In this measure, all errors are equivalent irrespective of their size making it a balanced measure of prediction accuracy.
+
+The interpretability of MAE contributes to its uniqueness as it is highly useful in the financial field where the parties involved require knowing their prediction performance in terms of money. The MAE of 5 shows that predictions are off actual prices by on average 5 which gives a clear understanding of how the model works.
+
+\subsection{3.5.2 Mean Squared Error (MSE)}
+The error of the mean squares error increases the influence of the bigger errors of prediction squaring the deviations between the real and the estimated values. MSE is more sensitive to outliers and extreme errors in prediction as it punishes large errors times more than it punishes small errors. Mean squared error (MSE) formula is:
+
+								(3.6)
+
+such that the squared errors do not cancel out the positive and negative errors. The squaring operation renders MSE especially efficient in finding models, which make infrequent large errors.
+
+In the financial sense, the sensitivity of MSE to large errors can be useful since large prediction errors can affect trading behavior and risk taking in a disproportionate way. Models that have low MSE will have more stable prediction error and less extreme prediction error.
+
+\subsection{3.5.3 Root Mean Squared Error (RMSE)}
+Root Mean Squared Error is the square root of MSE, which puts the measure of error back to the scale of the target variable. RMSE makes use of the sensitivity of MSE to large errors without sacrificing the interpretability of MAE and offers an overall measure of accuracy. The formula to calculate the RMSE is
+
+								(3.7)
+
+This measure continues to focus MSE on large errors but gives results in the same units as the original data, making them practical to understand.
+
+RMSE is commonly applied to financial modelling since it offers a more balanced evaluation of prediction accuracy, being consistent and, at the same time, easy to interpret. Metric is effective in penalizing models that occasionally make large errors, which is important when used in risk-sensitive applications.
+
+\subsection{3.5.4 R-squared (R²)}
+R-squared is used to determine the percentage of the variance on the target variable that is explained by the model, which gives the idea of the quality of the model fit regardless of the size of the data. The value of R2 is between 0 and 1 with an even higher value indicating an improved model performance. The mathematical formula is
+
+								(3.8)
+
+in which SSres is the total of squared residuals, and SStot is the total sum of squares. This measure will show the level of how the model has managed to capture the underlying trends in the data as opposed to a basic mean-based forecast.
+
+R-squared is especially useful when comparing the models in a different dataset/scale since it gives a universally comparable measure of explanatory power. A value of 0.8 on the R2 means that the model accounts for 80 percent of the stock prices, whether in dollars, rupees or other currencies.
+
+\subsection{3.5.5 Mean Absolute Percentage Error (MAPE)}
+Mean Absolute Percentage Error is a form of expression of the prediction errors as percentages of the actual values that gives a scale free measure and therefore, the expression can be used in comparison between various stocks or markets with different price levels. The calculation of the MAPE is
+
+								(3.9)
+
+The errors are normalized by the size of the target variable. This normalization also causes MAPE to be especially effective in the comparison of model performance in assets with different price ranges.
+
+The percentage-based representation in MAPE is easy to use by financial practitioners since they tend to think of percentages (losses and gains). A MAPE of 3\% shows that estimates are generally within 3\% of the true prices, which is a good indication of the relative accuracy of predictions, which can be easily reported to a stakeholder.
+
+\chapter{Experimental Setup}
+\label{ch:4}
+\section{4.1 Software and Hardware Environment}
+\subsection{4.1.1 Hardware Configuration}
+The experiments were used with a regular computing system having a multi-core CPU architecture and with enough RAM to support the processes of loading datasets and training models. The computational capabilities of the system were sufficient to support the neural network training and data preprocessing activities that are needed in this study.
+
+\subsection{4.1.2 Software Environment}
+\textbf{Programming Language:} All implementations were done in Python 3.x as the primary programming language because it has a large machine learning ecosystem, and a robust scientific computing platform.
+
+\textbf{Basic Libraries and Schemes:}
+
+\textbf{TensorFlow/}\textbf{Keras}\textbf{:} Version 2.x was the main deep learning model to implement all the neural network structures. Keras API had high level abstractions to model building and training processes.
+
+\textbf{Pandas:} Pandas is used to carry out extensive data manipulations, time series operations, loading of CSV files, and feature engineering operations required to preprocess financial data.
+
+\textbf{NumPy:} This is the foundation of the numerical calculations, array operations and mathematical transformation necessary during the data preprocessing and model evaluation steps.
+
+\textbf{Scikit-learn:} It is used to implement data preprocessing functions such as StandardScaler to normalize features, traintestsplit to partition data and evaluation metrics calculations.
+
+\textbf{Matplotlib:} This is used to create all visualizations such as time series plot, actual vs predicted, and training loss curve.
+
+\textbf{Statsmodels}\textbf{:} An analysis tool that can be utilized in time series analysis which may involve seasonal decomposition and Augmented Dickey-Fuller stationarity tests when doing exploratory data analysis.
+
+\textbf{Development Environment:} Jupyter Notebook was used to create an interactive development environment that supported the iterative model development, the visualization of the immediate result and full documentation of the experimental process.
+
+\subsection{4.1.3 Reproducibility Framework}
+There was a full reproducibility framework that was carried out to have repeatability of the results in various runs of the experiment. A global seed value of 42 was used on all random number generators such as Python random module, NumPy, and TensorFlow. Further environment variables were provided to implement deterministic operations and remove the sources of randomness in model initializations and training processes.
+
+\section{4.2 Dataset Loading and File Configuration}
+\subsection{4.2.1 Data File Structure}
+AAPL and NIFTY data were stored in CSV format with standardized column formats containing Date fields, High, Low, Open, and Close, and Volume fields. The datasets were loaded through pandas taking care of proper temporal column parsing in terms of date to maintain proper chronological order.
+
+\subsection{4.2.2 File Processing Protocol}
+The datasets were loaded and preliminarily validated in the same way. The date columns were then transformed to a datetime object so as to allow effective time series operations. Data integrity checks the data integrity checks were done to ensure completeness and detect the presence of any formatting inconsistencies prior to undergoing preprocessing operations.
+
+\subsection{4.2.3 Data Storage and Management}
+Systematic data and intermediate outcomes were registered in order to facilitate the smooth running of the experiment. To allow the training of similar models with various architectures without performing repetitive preprocessing, feature-engineered datasets were saved separately.
+
+\section{4.3 Experimental Execution Protocol}
+\subsection{4.3.1 Training Procedure}
+All the model architectures were trained using the same process to help give equal performance. The workflow of the experiment was:
+
+\textbf{Preprocessing Execution:} Missing value treatment, lagged variable based feature engineering, and data normalization using training data only parameters only.
+
+\textbf{Model Training:} Adding model switching: Training all seven model architectures with the same hyperparameters, early stopping, and validation procedures.
+
+\textbf{Performance Evaluation:} Systematic computation of the five-evaluation metrics of all tests set on the chronologically separated set of trains of each trained model.
+
+\subsection{4.3.2 Cross-Dataset Execution}
+The experimentation plan was aimed at conducting a full model comparison on each of the two datasets separately. The two market settings had to preprocess, train and evaluate individual data sets but with the same procedures and parameters.
+
+\subsection{4.3.3 Training Monitoring and Control}
+Validation loss tracking with early stopping implementation was used to track the progress of training. The history of training each of the models was kept so that the convergence pattern could be analysed and the behaviour of either overfitting or underfitting may be identified.
+
+\section{4.4 Result Storage and Organization}
+\subsection{4.4.1 Performance Data Structure}
+No systematic storage of model results was carried out and all model results were stored systematically in structured dictionary format based on type of model and evaluation measure. It was a standardized method of storage that made it possible to analyze and compare results across architectures and datasets automatically.
+
+\subsection{4.4.2 Visualization Generation and Storage}
+In every trained model, a complete set of visualizations was automatically produced and stored together with plots of actual versus predicted as well as training/validation loss curves. The visualization files were named and arranged systematically so as to be easily identified and analyzed.
+
+\subsection{4.4.3 Comparative Analysis Data}
+The outcome of the two datasets was saved in similar formats that could allow cross-dataset comparative analysis. Calculation and preservation of summary statistics and ranking information were made to assist in overall performance evaluation and model selection process.
+
+\chapter{Result and Analysis}
+\label{ch:5}
+The predictive model outcomes used in the presented work. A total of 7 models are tested on 2 datasets, AAPL and NIFTY, which are five sequential models (LSTM, GRU, Bi-LSTM, etc.) and two hybrid models (CNN-LSTM and CNN-GRU). Performance of the models is evaluated on the basis of various measures such as R2, RMSE, MAE, MAPE and directional accuracy of every dataset. Each model is given visualizations of actual vs predicted plot and loss curves. At the end of the research, a general comparison is made between all the models and datasets to conclude the results.
+
+\section{5.1 Results for AAPL Dataset}
+\subsection{5.1.1 Model Predictions}
+\textbf{LSTM:}
+
+\begin{center}
+\textit{Figure 5.1}\textit{(}\textit{a}\textit{)}\textit{: Actual vs Predicted Prices for LSTM model on AAPL dataset}
+\end{center}
+\begin{center}
+\textit{Figure 5.1}\textit{(}\textit{b}\textit{)}\textit{: Training and Validation Loss Curve for LSTM model on AAPL dataset}
+\end{center}
+\textbf{Bi-LSTM:}
+
+\begin{center}
+\textit{Figure 5.2(a): Actual vs Predicted Prices for Bi-LSTM model on AAPL dataset}
+\end{center}
+\begin{center}
+\textit{Figure 5.2(b): Training and Validation Loss Curve for Bi-LSTM model on AAPL dataset}
+\end{center}
+\textbf{RNN:}
+
+\begin{center}
+\textit{Figure 5.3(a): Actual vs Predicted Prices for }\textit{RNN}\textit{ }\textit{model on AAPL dataset}
+\end{center}
+\begin{center}
+\textit{Figure 5.3(b): Training and Validation Loss Curve for }\textit{RNN}\textit{ model on AAPL dataset}
+\end{center}
+\textbf{GRU:}
+
+\begin{center}
+\textit{Figure 5.4(a): Actual vs Predicted Prices for GRU model on AAPL dataset}
+\end{center}
+\begin{center}
+\textit{Figure 5.4(b): Training and Validation Loss Curve for GRU model on AAPL dataset}
+\end{center}
+\textbf{CNN:}
+
+\begin{center}
+\textit{Figure 5.5(a): Actual vs Predicted Prices for CNN model on AAPL dataset}
+\end{center}
+\begin{center}
+\textit{Figure 5.5(b): Training and Validation Loss Curve for CNN model on AAPL dataset}
+\end{center}
+\textbf{CNN-LSTM:}
+
+\begin{center}
+\textit{Figure 5.}\textit{6}\textit{(a): Actual vs Predicted Prices for }\textit{CNN-LSTM}\textit{ model on AAPL dataset}
+\end{center}
+\begin{center}
+\textit{Figure 5.}\textit{6}\textit{(b): Training and Validation Loss Curve for }\textit{CNN-LSTM}\textit{ model on AAPL dataset}
+\end{center}
+\textbf{CNN-GRU:}
+
+\begin{center}
+\textit{Figure 5.}\textit{7}\textit{(a): Actual vs Predicted Prices for }\textit{CNN-GRU}\textit{ model on AAPL dataset}
+\end{center}
+\begin{center}
+\textit{Figure 5.}\textit{7}\textit{(b): Training and Validation Loss Curve for }\textit{CNN-GRU }\textit{model on AAPL dataset}
+\end{center}
+\subsection{5.1.2 Performance Metrices (AAPL)}
+Table 5.1: Performance comparison of different models on AAPL dataset
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+\textbf{Model} & \textbf{MAE} & \textbf{MSE} & \textbf{RMSE} & \textbf{R²} & \textbf{MAPE} \\
+\hline
+LSTM & 9.102373 & 205.177113 & 14.324005 & 0.742167 & 0.042552 \\
+\hline
+Bi-LSTM & 6.398263 & 93.527765 & 9.670975 & 0.882469 & 0.030462 \\
+\hline
+RNN & 8.706764 & 116.106561 & 10.775275 & 0.854096 & 0.047187 \\
+\hline
+GRU & 2.209142 & 8.981282 & 2.996879 & 0.988714 & 0.011829 \\
+\hline
+CNN & 6.597797 & 73.000571 & 8.544037 & 0.908265 & 0.033832 \\
+\hline
+CNN-LSTM & 2.364311 & 10.176671 & 3.190090 & 0.987212 & 0.012542 \\
+\hline
+CNN-GRU & 2.131092 & 8.089500 & 2.844205 & 0.989834 & 0.011431 \\
+\hline
+\end{tabular}
+\caption{Table 5}
+\label{tab:table5}
+\end{table}
+
+The best fitted model (not overfitted) on AAPL is CNN-GRU with the lowest validation loss.
+
+\section{5.2 Results for NIFTY Dataset}
+\subsection{5.2.1 Model Predictions}
+\textbf{LSTM:}
+
+\begin{center}
+\textit{Figure 5.8(a): Actual vs Predicted Prices for LSTM model on NIFTY dataset}
+\end{center}
+\begin{center}
+\textit{Figure 5.8(b): Training and Validation Loss Curve for LSTM model on NIFTY data}\textit{set}
+\end{center}
+\textbf{Bi-LSTM:}
+
+\begin{center}
+\textit{Figure 5.9(a): Actual vs Predicted Prices for Bi-LSTM model on NIFTY dataset}
+\end{center}
+\begin{center}
+\textit{Figure 5.9(b): Training and Validation Loss Curve for Bi-LSTM model on NIFTY data}\textit{set}
+\end{center}
+\textbf{RNN:}
+
+\begin{center}
+\textit{Figure 5.10(a): Actual vs Predicted Prices for RNN model on NIFTY dataset}
+\end{center}
+\begin{center}
+\textit{Figure 5.10(b): Training and Validation Loss Curve for RNN model on NIFTY data}\textit{set}
+\end{center}
+\textbf{GRU:}
+
+\begin{center}
+\textit{Figure 5.11(a): Actual vs Predicted Prices for GRU model on NIFTY dataset}
+\end{center}
+\begin{center}
+\textit{Figure 5.11(b): Training and Validation Loss Curve for GRU model on NIFTY data}\textit{set}
+\end{center}
+\textbf{CNN:}
+
+\begin{center}
+\textit{Figure 5.12(a): Actual vs Predicted Prices for CNN model on NIFTY dataset}
+\end{center}
+\begin{center}
+\textit{Figure 5.12(b): Training and Validation Loss Curve for CNN model on NIFTY data}\textit{set}
+\end{center}
+\textbf{CNN-LSTM:}
+
+\begin{center}
+\textit{Figure 5.13(a): Actual vs Predicted Prices for CNN-LSTM model on NIFTY dataset}
+\end{center}
+\begin{center}
+\textit{Figure 5.13(b): Training and Validation Loss Curve for CNN-LSTM model on NIFTY data}\textit{set}
+\end{center}
+\textbf{CNN-GRU:}
+
+\begin{center}
+\textit{Figure 5.14(a): Actual vs Predicted Prices for CNN-GRU model on NIFTY dataset}
+\end{center}
+\begin{center}
+\textit{Figure 5.14(b): Training and Validation Loss Curve for CNN-GRU model on NIFTY data}\textit{set}
+\end{center}
+\subsection{5.2.2 Performance Metrices (NIFTY)}
+Table 5.2: Performance comparison of different models on NIFTY dataset
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+\textbf{Model} & \textbf{MAE} & \textbf{MSE} & \textbf{RMSE} & \textbf{R²} & \textbf{MAPE} \\
+\hline
+LSTM & 159.510258 & 46099.175865 & 214.707186 & 0.973461 & 0.015903 \\
+\hline
+Bi-LSTM & 83.151655 & 15417.795369 & 124.168415 & 0.991124 & 0.008627 \\
+\hline
+RNN & 69.648479 & 10876.797007 & 104.291884 & 0.993738 & 0.007469 \\
+\hline
+GRU & 121.549232 & 27914.575278 & 167.076555 & 0.983929 & 0.012346 \\
+\hline
+CNN & 157.426401 & 48045.276339 & 219.192327 & 0.972340 & 0.016410 \\
+\hline
+CNN-LSTM & 63.958504 & 9518.451183 & 97.562550 & 0.994520 & 0.006870 \\
+\hline
+CNN-GRU & 63.932915 & 9512.963669 & 97.534423 & 0.994523 & 0.006870 \\
+\hline
+\end{tabular}
+\caption{Table 6}
+\label{tab:table6}
+\end{table}
+
+The best fitted model (not overfitted) on NIFTY is CNN-GRU with the lowest validation loss.
+
+\section{5.3 Combined Comparison Across Models and Datasets}
+\begin{center}
+\textit{Fig 5.15: Compari}\textit{son of}\textit{ }\textit{MAE, }\textit{RMSE, }\textit{MAPE, }\textit{R²}\textit{ }\textit{metrics across all models for both AAPL and NIFTY datasets.}
+\end{center}
+\subsection{5.3.1 Cross-Dataset Performance Analysis}
+\textbf{Consistent High Performers:}\textbf{ }Both CNN-GRU and CNN-LSTM hybrid models are outstanding in terms of consistency on both datasets. CNN-GRU performs best on the AAPL data (R 2 = 0.9898, RMSE = 2.844) and also one of the top or highest on NIFTY data (R 2 = 0.9945, RMSE = 97.534). In the same way, CNN-LSTM shows high performance in both markets, which implies that it has good generalization.
+
+\textbf{Dataset-Specific Patterns:} An analysis indicates that there is a difference in the performance of the two datasets:
+
+\textbf{Characteristics of AAPL Data set:}
+
+\begin{itemize}
+  \item GRU comes out as the surprise leader of sequential models (R 2 = 0.9887, MAE = 2.209).
+  \item There is a great difference in performance among models (R 2 range 0.742 to 0.990).
+  \item Hybrid models are evidently better than pure sequential architectures.
+  \item Simple RNN does well (R 2=0.854), which indicates that short-term patterns can be learned in AAPL data.
+\end{itemize}
+
+\textbf{The Characteristics of NIFTY Dataset:} 
+
+\begin{itemize}
+  \item Better consistency of the performance of all the models (R 2: 0.972-0.995)
+  \item RNN is astonishingly more accurate than LSTM and GRU in the sequential models (R 2 = 0.9937 compared to 0.9735 and 0.9839).
+  \item The R 2 scores of all the models are very high (>0.97), which means that NIFTY data has a stronger predictable pattern.
+  \item The variance of performance is lower indicating that the Indian market data has more time patterns.
+\subsection{5.3.2 Advantages of Hybrid Models vs Sequential Models}
+\end{itemize}
+
+\textbf{Hybrid Model Superiority: }The findings strongly highlight the strengths of hybrid architectures:
+
+\begin{itemize}
+  \item \textbf{Better Feature Extraction:} CNN layers capture short-term temporal patterns, which are then processed by recurrent layers. This two-step mechanism enables the models to learn richer and more meaningful representations.
+  \item \textbf{Robust Across Markets:} Both CNN-LSTM and CNN-GRU consistently deliver high performance on different stock datasets, showing that they generalize well across market conditions.
+  \item \textbf{Well-Rounded Performance:} Hybrid models perform strongly across all evaluation metrics, not just one or two, which demonstrates their overall learning capability.
+\end{itemize}
+
+\textbf{Limitations of Sequential Models: }In contrast, pure sequential models reveal certain weaknesses:
+
+\begin{itemize}
+  \item \textbf{Dataset Dependence:} Their performance fluctuates noticeably between datasets, suggesting that these models are sensitive to the specific characteristics of the input data.
+  \item \textbf{Model-Specific Variations:} Interestingly, Simple RNN outperformed more advanced models like LSTM on the NIFTY dataset, which indicates that dataset properties can heavily influence how well a given sequential architecture works.
+  \item \textbf{Unstable Rankings:} The relative performance order of sequential models changes across datasets, making them less reliable in terms of consistent generalization.
+\section{5.4 Summary of Results}
+\end{itemize}
+
+This study compared seven different neural network architectures on two separate stock market datasets, leading to several important insights into the role of deep learning in financial forecasting.
+
+\subsection{5.4.1 Best Model by Dataset}
+\textbf{AAPL Dataset – CNN-GRU as the Top Performer}
+
+\begin{itemize}
+  \item \textbf{R² Score:} 0.9898, indicating the strongest ability to explain data variation.
+  \item \textbf{RMSE:} 2.844, reflecting the lowest prediction error.
+  \item \textbf{MAE:} 2.131, providing the highest average accuracy.
+  \item \textbf{MAPE:} 1.14\%, showing excellent percentage-based accuracy.
+\end{itemize}
+
+The CNN-GRU hybrid excels on the AAPL dataset by combining the pattern-recognition power of convolutional layers with the temporal learning strength of GRU units.
+
+\textbf{NIFTY Dataset – CNN-GRU as the Top Performer}
+
+\begin{itemize}
+  \item \textbf{R² Score:} 0.9945, demonstrating outstanding explanatory capability.
+  \item \textbf{RMSE:} 97.534, the lowest error among all models.
+  \item \textbf{MAE:} 63.933, tied with CNN-LSTM for the best average accuracy.
+  \item \textbf{MAPE:} 0.69\%, reflecting superior percentage accuracy.
+\end{itemize}
+
+Notably, CNN-GRU emerges as the leading model across both datasets, underscoring its robustness and ability to generalize effectively in different market environments.
+
+\subsection{5.4.2 Key Findings}
+\begin{itemize}
+  \item Among all the models tested, \textbf{CNN-GRU delivered the most reliable performance} on both the AAPL and NIFTY datasets.
+  \item The results suggest that \textbf{hybrid architectures tend to outperform simple sequential ones} — with CNN-GRU and CNN-LSTM emerging as the strongest overall.
+  \item Interestingly, \textbf{greater model complexity does not always translate into better accuracy}. In some cases, the simpler RNN gave stronger results than the more advanced LSTM.
+  \item The \textbf{NIFTY dataset appeared easier to predict compared to AAPL}, as every model achieved an R² above 0.97 on NIFTY, while performance on AAPL was more inconsistent.
+  \item \textbf{GRU proved to be both efficient and effective}, often matching or exceeding LSTM’s accuracy while requiring fewer resources.
+  \item Testing on both U.S. (AAPL) and Indian (NIFTY) data provided a form of \textbf{cross-market validation}, where CNN-GRU consistently performed well across markets, showing robustness.
+  \item Finally, by \textbf{using lagged features and carefully avoiding data leakage}, the evaluation setup ensured that the reported results reflect realistic, real-world predictive performance.
+\chapter{Socio-Economic Impact and Sustainability}
+\label{ch:6}
+\section{6.1 Introduction}
+\end{itemize}
+
+This chapter addresses the socio-economic consequences and sustainability of the application of advanced machine learning and deep learning models in financial markets. The chapter highlights the potential to revolutionize decision-making, enhance efficiency, and add value to the investors, institutions, and society with the help of these technologies besides ethical, regulatory and long-term sustainability implications.
+
+\section{6.2 Socio-Economic Impact}
+\subsection{6.2.1 Financial Markets}
+The creation of new neural network models to predict stock prices has far reaching consequences in financial markets and the financial market players:
+
+\textbf{Market Efficiency Improvement:} Predictive models which are implemented correctly also lead to an improvement in market efficiency as they help in better price discovery. When traders and institutional investors use the advanced AI-driven prediction systems, market prices reflect more efficiently available information and close the gaps to arbitrage, enhancing the overall market stability.
+
+\textbf{Democratization of Financial Analysis:} The traditional quantitative analysis has been controlled by large financial organizations and had considerable resources. The study will help democratise access to sophisticated analytical tools by offering open methodologies that can be adopted by smaller investment firms, individual traders and fintech startups to put small investors and larger investment firms on a level playing field in the financial markets.
+
+\textbf{Risk Management Improvements:} Increased prediction accuracy allows the improvement of risk evaluation and management procedures. Portfolio managers will be in a better position to decide on asset allocation, hedging and position sizing better, and ultimately minimize systemic risk and safeguard investor money in the turbulent market.
+
+\textbf{Institutional Trading Evolution:} The results endorse the development of algorithmic and high-frequency trading regimens where financial institutions are able to formulate better trading strategies that could adjust to fluctuating market situations and enhance efficiency in their trading endeavors.
+
+\subsection{6.2.2 Economic Development}
+The study has implications of overall economic development; it achieves this in a number of ways:
+
+\textbf{Capital Allocation Efficiency:} Stock price forecasting is better, leading to better capital market efficiency that allows the management of financial resources to productive investment. Efficiency in flow of capital to firms and other industries that have high growth opportunities leads to increased productivity of the economy.
+
+\textbf{Investment Decision Support:} The study offers instruments that can help in the improved investment decision making in different economic sectors. When investment performance is enhanced, it will lead to capital formation, business growth and employment, which will promote economic growth.
+
+\textbf{Financial Technology Innovation:} The approaches designed in the study are part of the expanding fintech industry, helping to make financial service innovations and establishing new business possibilities. This technology creates a lure to invest and talent in the financial technology ecosystem.
+
+\textbf{Cross-Market Integration:} The study helps to verify the models in other markets (US and Indian) and this fact helps to promote the international financial integration and cross-border investment flows, which lead to the global development of economies and interconnectedness of markets.
+
+\subsection{6.2.3 Socio-Economic Empowerment}
+The socio-economic implications of the research are more in terms of socio-economic empowerment:
+
+\textbf{Individual Investor Empowerment:} The research will help to empower individual investors with the tools that are currently the prerogative of institutional investors by bringing state-of-the-art predictive methods closer to the person. Such democratization of financial analysis can be used to decrease the disparity of wealth by enhancing the returns of retail investors.
+
+\textbf{Educational Impact:} The approach to research, which is comprehensive and open to research, serves as an excellent educational resource both to students, researchers, and professionals interested in learning how machine learning is used in finance. This is the imparting of knowledge which helps in skill development and capacity building in emerging technologies.
+
+\textbf{Small Business Finance:} Enhanced market forecasting can be advantageous to small and medium enterprises in that they would be able to access capital markets more effectively and also better evaluate growth companies. This facilitates entrepreneurship and innovation to the macro economy.
+
+\textbf{Pension and Retirement Planning:} Improved outcome of the pension funds and retirement accounts by improved prediction models can be used to enhance the performance of the investment which can help in generating financial security to the aging population and to help the social security systems not to be overloaded by the aged population.
+
+\section{6.3 Environmental Sustainability}
+\subsection{6.3.1 Environmental Impact}
+The issues of AI-based financial prediction systems must be taken into consideration regarding their environmental impact:
+
+\textbf{Computational Energy Usage:} Neural network models require a substantial amount of computational power to train and deploy, which consumes energy and causes carbon emission. The study considers this issue by proposing CNN-GRU as an effective architecture that can deliver the desired performance and meet the requirements of computation without consuming too much energy, as opposed to other architectures that may consume more.
+
+\textbf{Resource Optimization:} The research indirectly enhances the efficiency of making investment decisions and allocating capital in the economy which has led to optimization of resources. Better predictions will help to avoid wasting resources on investments that are not sustainable and refocus capital on eco-friendly and beneficial projects.
+
+\textbf{Digital Infrastructure Impact:} AI-based trading systems are widely used, which helps to increase the demands on the digital infrastructure, such as data centers and communication networks. These environmental costs can however be compensated for with the efficiency achieved through increased accuracy of prediction in terms of a better economic outcome.
+
+\textbf{Sustainable Investment Support:} With increased predictability, it would be possible to develop Environmental, Social, and Governance (ESG) investing by offering more valuable analytical instruments with which to assess sustainable investment prospects. This can facilitate the capital flow towards environmentally attractive projects and firms.
+
+\textbf{Carbon Footprint Mitigation Techniques:} The research approach focuses on computational efficiency, and CNN-GRU has been proved to be more efficient as well as less resource-intensive compared to other neural RNNs such as CNN-LSTM. The strategy is helpful in the creation of eco-friendly AI use in finance.
+
+\textbf{Green Finance Innovation:} It is possible to enhance better prediction models to facilitate the creation of better green finance instruments and carbon trade markets since it offers a better analytical basis to the pricing of environmental assets and risks.
+
+\section{6.4 Summary}
+The chapter shows that the neural network stock prediction study is larger than just technical contribution so as to have significant socio-economic value. The results indicate a good implication on the efficiency of financial markets, economic growth and empowerment of the individual investor. Although it considers the computational energy demands, the study considers the environmental issues by discovering effective architecture such as CNN-GRU that is efficient in terms of performance to resource ratios. The piece promotes the responsible development of AI in the financial sector, balancing technological progress and the sustainability issue, as well as serving the larger purpose of the availability, efficiency, and sustainability of financial technology solutions.
+
+\chapter{Addressing Complex Engineering Problems and Activities}
+\label{ch:7}
+\section{7.1 Introduction}
+This chapter shows the way the research tackles complicated engineering issues and undertakings as stipulated by the engineering accreditation criteria. The mapping practice confirms that the thesis work fits the advanced engineering education criteria as it is able to systematically tackle multifaceted technical problems that demand interdisciplinary knowledge, creative problem-solving, professional judgment.
+
+The analysis is organized in the frame of two major frameworks Complex Engineering Problems (P1-P7) and Complex Engineering Activities (A1-A6). These frameworks are assurances that the engineering graduates are prepared to confront real life difficulties that cannot be reduced to textbook problems and that they must be capable of merging the theoretical issues with practical implementation issues.
+
+\section{7.2 Mapping of P's (Complex Engineering Problems)}
+Table 7.1: Mapping of Complex Engineering Problems P’s
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{Attributes} & \textbf{Tick} & \textbf{Justification} \\
+\hline
+P1: Depth of Knowledge & ✓ & Knowledge on RNN, LSTM, GRU, CNN architectures, time series analysis, financial markets, statistical evaluation metrics (MAE, RMSE, R², MAPE), and cross-market validation techniques need to be gained \\
+\hline
+P2: Range of conflicting requirements & ✓ & Balancing prediction accuracy vs computational efficiency, real-time processing vs model complexity, overfitting prevention vs underfitting avoidance, generalizability vs dataset-specific optimization \\
+\hline
+P3: Depth of analysis & ✓ & Analysis required for statistical methods, time series decomposition, stationarity testing, neural network architectures comparison, hyperparameter optimization, and evaluation across different market conditions \\
+\hline
+P4: Familiarity of issues & ✓ & Stock market prediction is a familiar research area, but implementing data leakage prevention through lagged features and cross-market validation (US vs Indian markets) presents novel challenges \\
+\hline
+P5: Extent of Applicable Codes & ✓ & Limited established standards for AI-based financial prediction models, requiring development of custom evaluation frameworks, reproducibility protocols, and ethical AI implementation guidelines \\
+\hline
+P6: Extent of Stake-holder Involvement & ✓ & Multiple stakeholders including individual investors, institutional traders, financial regulators, AI researchers, and market participants with diverse and sometimes conflicting interests \\
+\hline
+P7: Interdependence & ✓ & Model performance depends on data preprocessing, feature engineering, architecture selection, hyperparameter tuning, evaluation methodology, and market conditions - all interconnected components \\
+\hline
+\end{tabular}
+\caption{Table 7}
+\label{tab:table7}
+\end{table}
+
+\section{7.3 Mapping of A's (Complex Engineering Activities)}
+Table 7.2: Mapping of Complex Engineering Activities A’s
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{Attributes} & \textbf{Tick} & \textbf{Justification} \\
+\hline
+A1: Involve the use of diverse resources & ✓ & Utilization of computational resources (GPUs/CPUs), multiple datasets (AAPL, NIFTY), software tools (Python, TensorFlow, Keras), statistical libraries, and extensive literature from finance and AI domains \\
+\hline
+A2: Require resolution of significant problems in analysis, design, or implementation & ✓ & Addressing data leakage through lagged features, preventing overfitting with early stopping, designing hybrid CNN-RNN architectures, implementing reproducible research framework, and ensuring fair model comparison \\
+\hline
+A3: Involve creative use of engineering knowledge and skills & ✓ & Novel application of CNN for time series feature extraction, creative combination with RNN for sequential processing, innovative evaluation methodology across different markets, and custom preprocessing pipeline development \\
+\hline
+A4: Require extensive knowledge from more than one engineering discipline & ✓ & Integration of Computer Science (ML algorithms), Financial Engineering (market dynamics), Statistics (time series analysis), Software Engineering (implementation), and Data Science (preprocessing, evaluation) \\
+\hline
+A5: Are applied in unfamiliar contexts & ✓ & Applying deep learning to financial prediction with realistic constraints, cross-market validation between developed (US) and emerging (Indian) markets, and addressing regulatory concerns in AI-driven trading systems \\
+\hline
+A6: Are outside the scope of standards and codes of practice & ✓ & Development of novel hybrid architectures (CNN-LSTM, CNN-GRU), custom evaluation framework for financial AI, innovative approaches to prevent data leakage, and establishment of cross-market validation protocols \\
+\hline
+\end{tabular}
+\caption{Table 8}
+\label{tab:table8}
+\end{table}
+
+\section{7.4 Summary}
+This chapter establishes that the research satisfies all the seven complex engineering problem characteristics and six complex engineering activity characteristics, which satisfies the advanced engineering education standards.
+
+\textbf{Complexity of the problem:} The problem is covered with multi-disciplinary issues (ML, finance, statistics, software) with the combination of accuracy and efficiency and the development of solutions which are above average in terms of quality. 
+
+\textbf{Activity Sophistication:} It exploits a wide array of resources, adopts creative and interdisciplinary strategies and comes up with innovative non-standard solutions. 
+
+\textbf{Professional Standards:} The study provides the graduates with the ability to solve some of the most complicated challenges, find innovative solutions to problems in novel settings, address the needs of stakeholders, and combine cross-disciplinary knowledge. 
+
+\textbf{Practical Impact:} The mapping confirms the research to be a true piece of engineering work, which has practical implications in AI-assisted financial engineering, and whose quality is both academically sound and professionally prepared.
+
+\chapter{Conclusion and Future Work}
+\label{ch:8}
+\section{8.1 Summary of Findings}
+This research carried out a detailed comparison of seven neural network models for stock price prediction, using both AAPL and NIFTY datasets. The models included Simple RNN, LSTM, Bidirectional LSTM, GRU, CNN, CNN-LSTM, and CNN-GRU, and their performance was assessed using five different evaluation metrics to determine which architectures are most effective for financial forecasting.
+
+The results highlight several important insights:
+
+\begin{itemize}
+  \item \textbf{Best Performing Model:} CNN-GRU stood out as the most effective architecture, achieving the highest accuracy across both datasets, with R² scores of 0.9898 (AAPL) and 0.9945 (NIFTY). This model consistently delivered strong results across two different markets while also being computationally efficient.
+  \item \textbf{Strength of Hybrid Models:} The findings confirm that combining convolutional layers for feature extraction with sequential models improves predictive power. Both CNN-GRU and CNN-LSTM ranked at the top, clearly outperforming purely sequential approaches.
+  \item \textbf{Market-Specific Differences:} A clear distinction emerged between the datasets. NIFTY was easier to model, with all architectures achieving R² above 0.97. In contrast, AAPL exhibited more variability, meaning that stronger hybrid models were required to achieve high accuracy.
+  \item \textbf{Efficiency of GRU Models:} GRU-based networks trained faster and required fewer resources than LSTM-based ones, while still delivering similar or even better accuracy in many cases.
+  \item \textbf{Complexity vs. Performance:} Interestingly, higher model complexity did not always guarantee better results. In several cases, the Simple RNN performed on par with, or even better than, LSTM on the NIFTY dataset, showing that simpler models can still be effective under certain conditions.
+\section{8.2 Contributions of the Study}
+\end{itemize}
+
+This research advances stock price prediction using neural networks in three main ways:
+
+\textbf{1. Methodological}
+
+\begin{itemize}
+  \item Conducts one of the first systematic comparisons of seven neural network architectures for financial forecasting.
+  \item Prevents data leakage by applying lagged features, ensuring realistic performance.
+  \item Validates models across both US (AAPL) and Indian (NIFTY) markets, showing generalizability.
+  \item Ensures reproducibility through fixed seeds and deterministic settings.
+\end{itemize}
+
+\textbf{2. Practical}
+
+\begin{itemize}
+  \item Offers clear guidance for practitioners, identifying CNN-GRU as the best balance between accuracy and efficiency.
+  \item Provides a reusable preprocessing and evaluation pipeline for financial time series.
+  \item Establishes baseline performance metrics for future research.
+\end{itemize}
+
+\textbf{3. Academic}
+
+\begin{itemize}
+  \item Confirms the strength of hybrid CNN-RNN models for time series forecasting.
+  \item Highlights differences in predictability between markets, contributing to understanding of market complexity.
+  \item Introduces a multi-metric evaluation framework for more robust assessment.
+\section{8.3 Limitations}
+  \item \textbf{Data Scope}: Only two stocks (AAPL, NIFTY) were analyzed within a fixed time period, limiting generalizability across different markets, regions, and economic cycles.
+  \item \textbf{Features}: Models used only OHLC data, without technical indicators, fundamentals, or external factors like news or macroeconomic variables.
+  \item \textbf{Temporal Context}: Inputs were restricted to short-term lags, missing longer-term trends and seasonality.
+  \item \textbf{Methodology}: Fixed architectures and limited hyperparameter tuning may have constrained model performance.
+  \item \textbf{Evaluation}: Train-test split was time-bound, so results reflect one market phase rather than varied conditions.
+  \item \textbf{Technical}: Resource limits restricted testing of larger models; interpretability of predictions was not explored in depth.
+\section{8.4 Future Work}
+  \item \textbf{Broader Datasets}: Extend analysis beyond AAPL and NIFTY to include multiple asset classes (commodities, forex, crypto) and more global markets (e.g., FTSE, Nikkei, DAX).
+  \item \textbf{Longer \& Diverse Timeframes}: Use extended historical periods covering bull, bear, and volatile markets; also explore intraday or high-frequency data.
+  \item \textbf{Richer Features}: Add technical indicators (RSI, MACD, Bollinger Bands), fundamentals (earnings, P/E ratios), macroeconomic data (GDP, inflation, interest rates), and sentiment from news or social media.
+  \item \textbf{Advanced Architectures}: Explore Transformers, Graph Neural Networks, and models with attention mechanisms; also test ensemble methods combining different architectures.
+  \item \textbf{Methodology Improvements}: Develop adaptive models that adjust to market conditions, test multi-horizon forecasts (1-day, 5-day, 20-day), and incorporate risk-adjusted performance measures (Sharpe ratio, drawdowns).
+  \item \textbf{Practical Enhancements}: Investigate online learning for real-time adaptability, improving practical applications in dynamic financial markets.
+\chapter{References}
+\end{itemize}
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{|l|l|}
+\hline
+[1] & M. Nabipour, P. Nayyeri, H. Jabani, S. S. Shamshirband, and A. Mosavi, "Predicting Stock Market Trends Using Machine Learning and Deep Learning Algorithms Via Continuous and Binary Data; a Comparative Analysis," \textit{IEEE Access}, vol. 8, pp. 143123–143145, Aug. 2020, doi: 10.1109/ACCESS.2020.3015966. \\
+\hline
+[2] & X. Ji, J. Wang, and Z. Yan, "A stock price prediction method based on deep learning technology," \textit{International Journal of Crowd Science}, vol. 5, no. 1, pp. 55–72, 2021, doi: 10.1108/IJCS-05-2020-0012. \\
+\hline
+[3] & M. A. I. Sunny, M. M. S. Maswood, and A. G. Alharbi, "Deep learning-based stock price prediction using LSTM and bi-directional LSTM model," in \textit{Proc. 2nd Novel Intelligent and Leading Emerging Sciences Conf. (NILES)}, 2020. \\
+\hline
+[4] & Shubham, Jain., Mark, Kain. (2018). Prediction for Stock Marketing Using Machine Learning. \textit{International Journal on Recent and Innovation Trends in Computing and Communication}. \\
+\hline
+[5] & Binoy, B., Nair., M., Minuvarthini., B., Sujithra., V.P., Mohandas. (2010). Stock Market Prediction Using a Hybrid Neuro-fuzzy System. doi: 10.1109/ARTCOM.2010.76 \\
+\hline
+[6] & Radu, Iacomin. (2015). Stock market prediction. doi: 10.1109/ICSTCC.2015.7321293 \\
+\hline
+[7] & Nelson, D.M.Q., Pereira, A.C.M., de Oliveira, R.A. (2017). Stock market’s price movement prediction with LSTM neural networks. \textit{International Joint Conference on Neural Networks (IJCNN)}. doi: 10.1109/IJCNN.2017.7966019 \\
+\hline
+[8] & Bao, W., Yue, J., Rao, Y. (2017). A deep learning framework for financial time series using stacked autoencoders and long-short term memory. \textit{PLoS}\textit{ ONE}, 12(7): e0180944. doi: 10.1371/journal.pone.0180944 \\
+\hline
+[9] & S. Mehtab and J. Sen, "Stock price prediction using CNN and LSTM-based deep learning models," in \textit{Proc. 2020 Int. Conf. Decision Aid Sciences and Application (DASA)}, 2020, pp. 1-5, doi: 10.1109/DASA51403.2020.9317207. \\
+\hline
+\end{tabular}
+\caption{Table 9}
+\label{tab:table9}
+\end{table}
+
+
+\end{document}
